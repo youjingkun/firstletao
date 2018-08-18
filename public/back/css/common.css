@@ -1,11 +1,121 @@
-body {
+.body-bgc {
   background-color: #222D32;
 }
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mt {
+  margin-top: 150px;
+}
+.mt_20 {
+  margin-top: 20px;
+}
+a,
+a:hover,
+a:visited,
+a:link,
+a:active{
+  text-decoration: none;
+}
+/* login页样式 */
 .panel .panel-title {
   font-size: 20px;
   text-align: center;
   line-height: 40px;
 }
-.mt {
-  margin-top: 150px;
+
+/* index */
+/* 侧边栏 */
+.lt-aside {
+  width: 180px;
+  height: 100%;
+  background-color: #222D32;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  transition: all 1s;
+}
+.lt-aside.hiddenmenu {
+  left:-180px;
+}
+
+.lt-aside .aside-name {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background-color: #367FA9;
+  text-align: center;
+}
+.lt-aside .aside-name a {
+  color: #fff;
+  font-size: 20px;
+}
+.aside-user {
+  text-align: center;
+  height: 180px;
+}
+.aside-user img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-top: 30px;
+}
+.aside-user p {
+  margin-top: 5px;
+  color: #fff;
+  font-size: 18px;
+}
+
+.aside-nav a {
+  display: block;
+  color: #fff;
+  width: 100%;
+  height: 40px;
+  padding-left: 40px;
+  line-height: 40px;
+  border-left: 3px solid transparent;  
+}
+.aside-nav div a {
+  padding-left: 60px;
+}
+.aside-nav a.current {
+  background-color: #1D1F21;
+  border-left: 3px solid #069;
+}
+
+
+/* 右侧主体 */
+.right-main {
+  height: 2000px;
+  padding-top: 50px;
+  padding-left: 180px;
+  transition: all 1s;
+}
+.right-main.hiddenmenu {
+  padding-left: 0px;
+}
+/* topbar */
+.lt-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color:#367FA9;
+  line-height: 50px;
+  padding-left: 180px;  
+  transition: all 1s;
+}
+.lt-topbar.hiddenmenu{
+  padding-left: 0px;
+}
+.lt-topbar a {
+  color: #fff;
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
 }
