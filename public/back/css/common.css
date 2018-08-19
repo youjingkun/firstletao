@@ -119,3 +119,19 @@ a:active{
   height: 50px;
   text-align: center;
 }
+.echart-left{
+  width: 48%;
+  height: 400px;
+  border: 1px solid #000;
+}
+.echart-right{
+  width: 48%;
+  height: 400px;
+  border: 1px solid #000;
+}
+/* username */
+.right-main .lt-content table th,
+.right-main .lt-content table td {
+  text-align: center;
+  vertical-align: middle;
+}
