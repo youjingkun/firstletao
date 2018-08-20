@@ -49,7 +49,6 @@ $(function(){
       },
       dataType:"json",
       success:function(info){
-        console.log(info);
         var htmlStr = template("tmp2",info);
         $(".dropdown-menu").html(htmlStr);
       }
@@ -59,6 +58,10 @@ $(function(){
   //获取选中下拉的值渲染给一级分类
   $('.dropdown-menu').on('click','a',function(){
     $(".first-cate").text($(this).text());
+    var id = $(this).data("id")
+    $("[name='categoryId']").val(id);
+    // 上传图片后手动改变校验状态
+    $("#form").data("bootstrapValidator").updateStatus("categoryId","VALID");
   })
 
   //通过插件上传图片,获取响应图片的地址
@@ -67,6 +70,73 @@ $(function(){
     done:function(e,data){
       var src = data.result.picAddr;
       $("#fileimg").attr("src",src);
+      $("[name='brandLogo']").val(src);
+      // 上传图片后手动改变校验状态
+      $("#form").data("bootstrapValidator").updateStatus("brandLogo","VALID");
     }
+  })
+
+  //表单校验
+  $("#form").bootstrapValidator({
+
+    // 重置排除项
+    excluded: [],
+
+    // 配置校验图标
+    feedbackIcons: {
+      valid: 'glyphicon glyphicon-ok',    // 校验成功
+      invalid: 'glyphicon glyphicon-remove',  // 校验失败
+      validating: 'glyphicon glyphicon-refresh' // 校验中
+    },
+
+    // 配置字段校验规则
+    fields:{
+      categoryId:{
+        validators:{
+          notEmpty:{
+            message:"请选择一级分类"
+          }
+        }
+      },
+      brandName:{
+        validators:{
+          notEmpty:{
+            message:"请输入二级分类"
+          }
+        }
+      },
+      brandLogo:{
+        validators:{
+          notEmpty:{
+            message:"请选择图片"
+          }
+        }
+      }
+    }
+  })
+
+  //表单校验完成后,阻止默认提交,通过ajax请求
+  $("#form").on("success.form.bv",function(e){
+    e.preventDefault();
+    $.ajax({
+      type:"post",
+      url:"/category/addSecondCategory",
+      data:$("#form").serialize(),
+      dataType:"json",
+      success:function(info){
+        if(info.success){
+          // 关闭模态框
+          $("#modal-add").modal("hide");
+          // 重置表单内容
+          $("#form").data("bootstrapValidator").resetForm(true);
+          // 重置id和图片
+          $('.dropdown .first-cate').text("请选择一级分类");
+          $("#fileimg").attr("src","./images/none.png");
+          //渲染第一页
+          currentPage = 1;
+          render();
+        }
+      }
+    })
   })
 })
